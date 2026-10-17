@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Вы уже были у нас?</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div style="position: absolute; left: 20px; right: 20px; top: 52px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+    <a href="Onb-City.dc.html" aria-label="Назад" class="back"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-left" size="{{ s22 }}"></x-import></a>
+    <div class="dots" role="img" aria-label="Шаг 4 из 4"><i></i><i></i><i></i><i class="on"></i></div>
+    <span style="width: 44px;"></span>
+  </div>
+
+  <div style="position: absolute; left: 20px; right: 20px; top: 112px; height: 150px; border-radius: var(--radius-xl); overflow: hidden; background: var(--emerald-deep);">
+    <img src="img/reception.jpg" alt="Регистратура EMIRMED с дубовыми рейками" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  </div>
+
+  <div style="position: absolute; left: 20px; right: 20px; top: 282px; display: grid; gap: 14px;">
+    <div>
+      <h1 class="h1">Вы уже были в EMIRMED?</h1>
+      <p class="lead">Сразу покажем нужное. После входа по номеру история подтянется сама.</p>
+    </div>
+    <div style="display: grid; gap: 8px;">
+      <a href="Home-New.dc.html" class="option">
+        <img class="ico" src="img/assistant.svg" alt="">
+        <span class="strip__body"><span class="option__t">Впервые</span><span class="option__s">Подскажем врача и покажем, как всё устроено</span></span>
+        <span class="strip__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </a>
+      <a href="Home-Returning.dc.html" class="option">
+        <img class="ico" src="img/results.svg" alt="">
+        <span class="strip__body"><span class="option__t">Уже есть визиты</span><span class="option__s">Результаты, заключения и что дальше</span></span>
+        <span class="strip__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </a>
+      <a href="Home-Care.dc.html" class="option">
+        <img class="ico" src="img/calendar.svg" alt="">
+        <span class="strip__body"><span class="option__t">Есть запись или наблюдение</span><span class="option__s">Ближайший визит, подготовка и план врача</span></span>
+        <span class="strip__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </a>
+    </div>
+  </div>
+
+  <p style="position: absolute; left: 32px; right: 32px; bottom: 40px; margin: 0; text-align: center; font: 400 13px/18px var(--font-sans); color: var(--ink-3);">Войти по номеру телефона можно в профиле</p>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { s20: 20, s22: 22 };
+  }
+}
+</script>
+</body>
+</html>

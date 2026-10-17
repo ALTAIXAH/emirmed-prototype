@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Запись · выбор врача</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll scroll--end">
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.TopBar" variant="nav" title="Запись к врачу"></x-import>
+      <a class="hit-left" href="Home-Returning.dc.html" aria-label="Назад"></a>
+    </div>
+    <x-import component-from-global-scope="EmirMed.SearchBar" placeholder="Врач, услуга или симптом"></x-import>
+    <div class="em-carousel" style="gap: 8px; padding-bottom: 2px;">
+      <x-import component-from-global-scope="EmirMed.Chip" selected="{{ yes }}">Педиатр</x-import>
+      <x-import component-from-global-scope="EmirMed.Chip">Терапевт</x-import>
+      <x-import component-from-global-scope="EmirMed.Chip">ЛОР</x-import>
+      <x-import component-from-global-scope="EmirMed.Chip">Гинеколог</x-import>
+      <x-import component-from-global-scope="EmirMed.Chip">Стоматолог</x-import>
+    </div>
+    <div class="sec"><h2>Есть время сегодня</h2><span class="muted">3 врача</span></div>
+    <div class="list">
+      <a class="row" href="Book-Slot.dc.html">
+        <x-import component-from-global-scope="EmirMed.Avatar" src="img/sayandinova.jpg" name="Саяндинова Назгуль" size="{{ s52 }}" zoom="{{ zoom }}" focus="50% 36%"></x-import>
+        <span class="row__body"><span class="row__t row__t--2">Саяндинова Назгуль Абильевна</span><span class="row__s">Педиатр · рейтинг 5,0</span><span class="row__ok">Сегодня в 15:30</span></span>
+        <span class="row__end">7 000 ₸</span>
+      </a>
+      <a class="row" href="Book-Slot.dc.html">
+        <x-import component-from-global-scope="EmirMed.Avatar" src="img/zaiyrbek.jpg" name="Зайырбек Сымбат" size="{{ s52 }}" zoom="{{ zoom }}" focus="50% 36%"></x-import>
+        <span class="row__body"><span class="row__t row__t--2">Зайырбек Сымбат Жаркынбеккызы</span><span class="row__s">Врач общей практики · 5,0</span><span class="row__ok">Сегодня в 17:00</span></span>
+        <span class="row__end">7 000 ₸</span>
+      </a>
+      <a class="row" href="Book-Slot.dc.html">
+        <x-import component-from-global-scope="EmirMed.Avatar" src="img/matkasimov.jpg" name="Маткасимов Рүстем" size="{{ s52 }}" zoom="{{ zoom }}" focus="50% 36%"></x-import>
+        <span class="row__body"><span class="row__t row__t--2">Маткасимов Рүстем Жанатбекұлы</span><span class="row__s">Врач общей практики · 5,0</span><span class="row__ok">Завтра в 09:00</span></span>
+        <span class="row__end">7 000 ₸</span>
+      </a>
+    </div>
+    <p class="dock-note" style="margin: 0;">Цена фиксируется при записи и не меняется на кассе</p>
+  </div>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { yes: true, s52: 52, zoom: 2.4 };
+  }
+}
+</script>
+</body>
+</html>

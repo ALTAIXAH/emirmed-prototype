@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Что умеет приложение</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <section style="position: absolute; left: 0; right: 0; top: 0; height: 268px; background: var(--emerald-deep); border-radius: 0 0 32px 32px; overflow: hidden; padding: 52px 20px 24px; display: flex; flex-direction: column;">
+    <div aria-hidden="true" style="position: absolute; right: -90px; top: 20px; width: 280px; pointer-events: none;">
+      <x-import component-from-global-scope="EmirMed.Rings" tone="glow" count="{{ ringCount }}" width="{{ ringWidth }}" stroke-width="{{ ringStroke }}"></x-import>
+    </div>
+    <div style="position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+      <a href="Main.dc.html" aria-label="Назад" class="back" style="background: rgba(255, 255, 255, 0.12); box-shadow: none; color: #ffffff;">
+        <x-import component-from-global-scope="EmirMed.Icon" name="chevron-left" size="{{ s22 }}"></x-import>
+      </a>
+      <div class="dots dots--light" role="img" aria-label="Шаг 2 из 4"><i></i><i class="on"></i><i></i><i></i></div>
+      <a href="Onb-Start.dc.html" style="padding: 12px 4px; font: 600 15px/20px var(--font-sans); color: #ffffff;">Пропустить</a>
+    </div>
+    <div style="flex-grow: 1;"></div>
+    <h1 style="position: relative; margin: 0; font: 600 26px/32px var(--font-display); letter-spacing: -0.025em; color: var(--on-deep);">Всё, что раньше требовало звонка</h1>
+    <p style="position: relative; margin: 6px 0 0; font: 400 15px/21px var(--font-sans); color: rgba(255, 255, 255, 0.84);">Рутину берёт приложение — вы занимаетесь здоровьем.</p>
+  </section>
+
+  <div style="position: absolute; left: 20px; right: 20px; top: 288px; display: grid; gap: 8px;">
+    <div class="strip">
+      <img class="ico" src="img/calendar.svg" alt="">
+      <span class="strip__body"><span class="strip__t">Запись за минуту</span><span class="strip__s">Без звонков, цена фиксируется сразу</span></span>
+    </div>
+    <div class="strip">
+      <img class="ico" src="img/labs.svg" alt="">
+      <span class="strip__body"><span class="strip__t">Анализы простыми словами</span><span class="strip__s">Результаты в телефоне, с пояснением</span></span>
+    </div>
+    <div class="strip">
+      <img class="ico" src="img/gift.svg" alt="">
+      <span class="strip__body"><span class="strip__t">Скидка и бонусы по карте</span><span class="strip__s">Копите с каждой оплаты</span></span>
+    </div>
+    <div class="strip">
+      <img class="ico" src="img/family.svg" alt="">
+      <span class="strip__body"><span class="strip__t">Вся семья рядом</span><span class="strip__s">Записывайте детей и родителей</span></span>
+    </div>
+    <div class="strip">
+      <img class="ico" src="img/assistant.svg" alt="">
+      <span class="strip__body"><span class="strip__t">На связи 24/7</span><span class="strip__s">Помощник и живые люди, RU и KZ</span></span>
+    </div>
+  </div>
+
+  <a href="Onb-City.dc.html" class="em-btn em-btn--primary" style="position: absolute; left: 20px; right: 20px; bottom: 34px;">Дальше</a>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { s20: 20, s22: 22, ringCount: 4, ringWidth: 280, ringStroke: 1.2 };
+  }
+}
+</script>
+</body>
+</html>

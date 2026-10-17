@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Запись · оплата</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll scroll--dock">
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.TopBar" variant="nav" title="Подтверждение"></x-import>
+      <a class="hit-left" href="Book-Slot.dc.html" aria-label="Назад"></a>
+    </div>
+    <x-import component-from-global-scope="EmirMed.BookingSummary" doctor="{{ doctor }}" when="Пт, 16 октября · 10:30" branch="ул. Нусупбекова, 26/1" service="Первичный приём педиатра" patient="Айлин, 4 года" price="{{ price }}" discount="{{ discount }}" total="{{ total }}"></x-import>
+    <div class="list">
+      <div class="row">
+        <img class="ico" src="img/online.svg" alt="">
+        <span class="row__body"><span class="row__s">Способ оплаты</span><span class="row__t">Kaspi.kz</span></span>
+        <span class="row__ok">Изменить</span>
+      </div>
+      <div class="row">
+        <img class="ico" src="img/gift.svg" alt="">
+        <span class="row__body"><span class="row__t">Списать бонусы</span><span class="row__s">{{ bonusNote }}</span></span>
+        <x-import component-from-global-scope="EmirMed.Checkbox" checked="{{ useBonus }}" on-change="{{ toggleBonus }}"></x-import>
+      </div>
+    </div>
+  </div>
+  <div class="em-screen__dock em-screen__dock--col">
+    <button type="button" class="em-btn em-btn--primary em-btn--block" onClick="{{ pay }}">Оплатить {{ amount }}</button>
+    <div class="dock-note">Скидка по карте учтена · чек придёт в приложение</div>
+  </div>
+
+  <sc-if value="{{ paying }}" hint-placeholder-val="{{ no }}">
+    <div class="overlay">
+      <div class="sheet" role="status">
+        <div class="spinner" aria-hidden="true"></div>
+        <h2 class="sheet__t">Ждём подтверждение Kaspi</h2>
+        <p class="sheet__s">Обычно это пара секунд. Не закрывайте приложение.</p>
+        <div class="progress" aria-hidden="true"><i></i></div>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ paid }}" hint-placeholder-val="{{ no }}">
+    <div class="overlay">
+      <div class="sheet" role="status">
+        <div class="okmark" aria-hidden="true"><span class="okmark__ring"></span><span class="okmark__ring"></span><span class="okmark__disc"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M11 21l6 6 12-13" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+        <h2 class="sheet__t">Оплачено {{ amount }}</h2>
+        <p class="sheet__s">Записываем Айлин к врачу…</p>
+        <a ref="{{ doneRef }}" class="em-btn em-btn--primary em-btn--block" href="Book-Done.dc.html">Продолжить</a>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  componentWillUnmount() { clearTimeout(this._t1); clearTimeout(this._t2); cancelAnimationFrame(this._raf); }
+  countTo(target) {
+    const from = (this.state && this.state.shown) || 6300;
+    const t0 = performance.now();
+    cancelAnimationFrame(this._raf);
+    const step = (now) => {
+      const k = Math.min(1, (now - t0) / 500);
+      this.setState({ shown: Math.round(from + (target - from) * (1 - Math.pow(1 - k, 3))) });
+      if (k < 1) this._raf = requestAnimationFrame(step);
+    };
+    this._raf = requestAnimationFrame(step);
+  }
+  renderVals() {
+    if (!this._doneRef) this._doneRef = window.React.createRef();
+    const st = this.state || {};
+    const stage = st.stage || 'idle';
+    const shown = st.shown || 6300;
+    const money = (v) => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₸';
+    return {
+      no: false,
+      doctor: { name: 'Саяндинова Назгуль Абильевна', specialty: 'Педиатр', photo: 'img/sayandinova.jpg' },
+      price: 7000,
+      discount: st.bonus ? { label: 'Скидка по карте и бонусы', amount: 3150 } : { label: 'Скидка по карте 10%', amount: 700 },
+      total: shown,
+      amount: money(shown),
+      useBonus: !!st.bonus,
+      bonusNote: st.bonus ? 'Списываем 2 450 ₸ бонусами' : 'Доступно 2 450 ₸',
+      toggleBonus: (v) => { this.setState({ bonus: v }); this.countTo(v ? 3850 : 6300); },
+      paying: stage === 'paying',
+      paid: stage === 'paid',
+      doneRef: this._doneRef,
+      pay: () => {
+        this.setState({ stage: 'paying' });
+        clearTimeout(this._t1); clearTimeout(this._t2);
+        this._t1 = setTimeout(() => {
+          this.setState({ stage: 'paid' });
+          this._t2 = setTimeout(() => { if (this._doneRef.current) this._doneRef.current.click(); }, 1600);
+        }, 2000);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

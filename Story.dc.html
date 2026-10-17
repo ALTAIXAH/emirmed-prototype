@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Сторис · акция</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <x-import component-from-global-scope="EmirMed.StoryViewer" image="img/mri.jpg" segments="{{ segs }}" active="{{ active }}" progress="{{ progress }}" meta="Акции · до 31 октября" badge="Акция" badge-tone="promo" badge-icon="percent" title="МРТ с выгодой −20%" text="Специальная цена до конца месяца. Цена фиксируется при записи." cta="Записаться" on-close="{{ noop }}" on-cta="{{ noop }}"></x-import>
+  <a href="Home-Returning.dc.html" aria-label="Закрыть сторис" style="position: absolute; right: 8px; top: 56px; width: 56px; height: 56px; z-index: 5; border-radius: 50%;"></a>
+  <a href="Book-Doctors.dc.html" aria-label="Записаться на МРТ" style="position: absolute; left: 20px; right: 20px; bottom: 40px; height: 60px; z-index: 5; border-radius: 999px;"></a>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { segs: 4, active: 1, progress: 0.45, noop: () => {} };
+  }
+}
+</script>
+</body>
+</html>

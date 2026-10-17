@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Главная · новый пациент</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll">
+    <x-import component-from-global-scope="EmirMed.TopBar" greeting="Добрый день!" name="Чем помочь?" city="Алматы"></x-import>
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.Stories" label="Как всё устроено" items="{{ stories }}"></x-import>
+      <a class="hit" href="Story.dc.html" aria-label="Открыть сторис"></a>
+    </div>
+
+    <section class="hero">
+      <div>
+        <div class="hero__eyebrow">Впервые в EMIRMED</div>
+        <h2 class="hero__t">Запишитесь к врачу за минуту</h2>
+        <p class="hero__s">Цена фиксируется сразу при записи</p>
+      </div>
+      <div class="hero__btns hero__btns--one">
+        <a class="em-btn em-btn--inverse em-btn--md" href="Book-Doctors.dc.html">Выбрать врача</a>
+      </div>
+    </section>
+
+    <div class="sec"><h2>К кому записаться</h2></div>
+    <a class="ask" href="AI-Chat.dc.html">
+      <x-import component-from-global-scope="EmirMed.Icon" name="sparkle" size="{{ s20 }}"></x-import>
+      <span>Опишите, что беспокоит</span>
+      <span class="ask__go"><x-import component-from-global-scope="EmirMed.Icon" name="arrow-right" size="{{ s18 }}"></x-import></span>
+    </a>
+    <div class="dirs">
+      <sc-for list="{{ dirs }}" as="d" hint-placeholder-count="6">
+        <a class="dir" href="Book-Doctors.dc.html"><img src="{{ d.img }}" alt=""><span>{{ d.label }}</span></a>
+      </sc-for>
+    </div>
+
+    <div class="sec"><h2>Акции для вас</h2><a href="Bonus.dc.html">Все</a></div>
+    <div class="banners">
+      <a class="banner banner--deep" href="Story.dc.html">
+        <img class="banner__photo" src="img/mri.jpg" alt="">
+        <span class="banner__badge">−20%</span>
+        <span><span class="banner__t">МРТ с выгодой</span><span class="banner__s">Специальная цена до конца октября</span></span>
+      </a>
+      <a class="banner banner--rose" href="Bonus.dc.html">
+        <img class="banner__art" src="img/labs.svg" alt="">
+        <span class="banner__badge">−20%</span>
+        <span><span class="banner__t">Месяц анализов</span><span class="banner__s">На все анализы до 31 октября</span></span>
+      </a>
+      <a class="banner banner--oak" href="Bonus.dc.html">
+        <img class="banner__art" src="img/gift.svg" alt="">
+        <span class="banner__badge">Карта</span>
+        <span><span class="banner__t">Бонусы с первого визита</span><span class="banner__s">Копите с каждой оплаты</span></span>
+      </a>
+    </div>
+    <div class="dotsbar" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+
+    <section class="em-card pad">
+      <h2 class="card-title">Как проходит первый визит</h2>
+      <ol class="steps">
+        <li><b>1</b><span>Выберите врача и время — цена фиксируется</span></li>
+        <li><b>2</b><span>Накануне пришлём памятку: что взять с собой</span></li>
+        <li><b>3</b><span>В день визита — пропуск и маршрут до кабинета</span></li>
+      </ol>
+    </section>
+
+    <div class="list">
+      <a class="row" href="Onb-City.dc.html">
+        <img class="ico" src="img/pin.svg" alt="">
+        <span class="row__body"><span class="row__t">Ближайший филиал</span><span class="row__s">ул. Нусупбекова, 26/1 · 1,2 км</span></span>
+        <span class="row__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </a>
+      <a class="row" href="AI-Chat.dc.html">
+        <img class="ico" src="img/assistant.svg" alt="">
+        <span class="row__body"><span class="row__t">Помощник 24/7</span><span class="row__s">Ответит по-русски и қазақша</span></span>
+        <span class="row__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </a>
+    </div>
+  </div>
+  <div class="em-screen__fade" style="height: 104px;"></div>
+  <div class="em-screen__tab"><x-import component-from-global-scope="EmirMed.TabBar" default-value="home"></x-import></div>
+  <nav class="tablinks" aria-label="Разделы">
+    <a href="Home-New.dc.html" aria-label="Главная"></a>
+    <a href="Visit-Pass.dc.html" aria-label="Визиты"></a>
+    <a href="Book-Doctors.dc.html" aria-label="Записаться"></a>
+    <a href="Health.dc.html" aria-label="Здоровье"></a>
+    <a href="Profile.dc.html" aria-label="Профиль"></a>
+  </nav>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      s18: 18,
+      s20: 20,
+      stories: [
+        { label: 'Знакомство', image: 'img/reception.jpg' },
+        { label: 'Акции', image: 'img/mri.jpg', badge: '−20%' },
+        { label: 'Врачи', image: 'img/sayandinova.jpg', zoom: 2.4, focus: '50% 36%' },
+        { label: 'Анализы', icon: 'flask', tone: 'olive' },
+        { label: 'Дети', image: 'img/pediatrics.jpg' },
+        { label: 'Филиалы', image: 'img/branch-nusupbekova.jpg' }
+      ],
+      dirs: [
+        { label: 'Педиатр', img: 'img/pediatr.svg' },
+        { label: 'Терапевт', img: 'img/therapist.svg' },
+        { label: 'Анализы', img: 'img/labs.svg' },
+        { label: 'УЗИ', img: 'img/ultrasound.svg' },
+        { label: 'МРТ', img: 'img/mri-icon.svg' },
+        { label: 'Кардиолог', img: 'img/heart.svg' },
+        { label: 'Стоматолог', img: 'img/dentist.svg' },
+        { label: 'Врач на дом', img: 'img/home.svg' },
+        { label: 'Онлайн', img: 'img/online.svg' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Помощник EMIRMED</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll scroll--dock">
+    <header class="em-top">
+      <a class="em-top__btn" href="Home-Returning.dc.html" aria-label="Назад"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-left" size="{{ s22 }}"></x-import></a>
+      <div style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px;">
+        <img src="img/assistant.svg" alt="" style="width: 42px; height: 42px;">
+        <div><div class="em-doc__name" style="font-size: 16px; line-height: 20px;">Помощник EMIRMED</div><div class="em-doc__slot" style="font-weight: 500; display: flex; align-items: center; gap: 6px;"><span class="live-dot"></span>{{ status }}</div></div>
+      </div>
+    </header>
+    <x-import component-from-global-scope="EmirMed.ChatBubble">Сәлеметсіз бе, Алия! Опишите, что беспокоит, — подскажу врача и ближайшее время.</x-import>
+    <x-import component-from-global-scope="EmirMed.ChatBubble" from="me">У дочки второй день температура 38 и болит горло. Ей 4 года</x-import>
+    <sc-if value="{{ thinking }}" hint-placeholder-val="{{ no }}">
+      <div class="typing" role="status" aria-label="Помощник печатает"><i></i><i></i><i></i></div>
+    </sc-if>
+    <sc-if value="{{ answered }}" hint-placeholder-val="{{ yes }}">
+      <div class="rel popin">
+        <x-import component-from-global-scope="EmirMed.ChatBubble" actions="{{ answerActions }}" meta="Подсказка, а не диагноз. Решение принимает врач.">Нужен <b>педиатр</b> — он осмотрит горло и при необходимости направит к ЛОРу. Если температура выше 39 или ребёнку трудно дышать — сразу звоните 103.</x-import>
+        <a class="hit" href="Book-Slot.dc.html" aria-label="Записаться к педиатру сегодня в 15:30"></a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ answered }}" hint-placeholder-val="{{ yes }}">
+      <div class="em-row popin">
+        <x-import component-from-global-scope="EmirMed.Chip" icon="scan">Сколько стоит МРТ?</x-import>
+        <x-import component-from-global-scope="EmirMed.Chip" icon="flask">Как готовиться к анализам</x-import>
+      </div>
+    </sc-if>
+  </div>
+  <div class="em-screen__dock" style="background: var(--canvas); box-shadow: none; padding-top: 10px;">
+    <x-import component-from-global-scope="EmirMed.AiComposer" placeholder="Напишите или скажите голосом"></x-import>
+  </div>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  componentDidMount() { this._t = setTimeout(() => this.setState({ answered: true }), 1800); }
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    const E = window.EmirMed;
+    const h = window.React.createElement;
+    const answered = !!(this.state && this.state.answered);
+    return {
+      yes: true,
+      no: false,
+      s22: 22,
+      answered: answered,
+      thinking: !answered,
+      status: answered ? 'Отвечает 24/7 · RU · KZ' : 'Печатает…',
+      answerActions: [
+        h(E.Button, { key: 'book', variant: 'primary', size: 'sm', icon: 'calendar' }, 'Педиатр сегодня в 15:30'),
+        h(E.Button, { key: 'home', variant: 'secondary', size: 'sm', icon: 'house-plus' }, 'Врач на дом')
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

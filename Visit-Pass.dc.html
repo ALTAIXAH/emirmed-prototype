@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Визит · пропуск</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll">
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.TopBar" variant="nav" title="Сегодня" action="phone" action-label="Позвонить в регистратуру"></x-import>
+      <a class="hit-left" href="Home-Care.dc.html" aria-label="Назад"></a>
+    </div>
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.VisitPass" label="Через 40 минут" photo="img/reception.jpg" branch-label="Регистратура на Нусупбекова" branch="ул. Нусупбекова, 26/1" time="10:30" date="Пт, 16 октября" doctor="{{ doctor }}" route="{{ route }}" hint="Отметьтесь здесь — к регистратуре подходить не нужно." on-arrive="{{ noop }}" on-code="{{ noop }}"></x-import>
+      <a class="hit" href="Visit-Queue.dc.html" aria-label="Я в клинике"></a>
+    </div>
+    <div class="em-card em-list">
+      <x-import component-from-global-scope="EmirMed.ListRow" icon="route" title="Маршрут до филиала" value="1,2 км"></x-import>
+    </div>
+  </div>
+  <div class="em-screen__fade" style="height: 104px;"></div>
+  <div class="em-screen__tab"><x-import component-from-global-scope="EmirMed.TabBar" default-value="visits"></x-import></div>
+  <nav class="tablinks" aria-label="Разделы">
+    <a href="Home-Care.dc.html" aria-label="Главная"></a>
+    <a href="Visit-Pass.dc.html" aria-label="Визиты"></a>
+    <a href="Book-Doctors.dc.html" aria-label="Записаться"></a>
+    <a href="Health.dc.html" aria-label="Здоровье"></a>
+    <a href="Profile.dc.html" aria-label="Профиль"></a>
+  </nav>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      noop: () => {},
+      doctor: { name: 'Саяндинова Назгуль Абильевна', specialty: 'Педиатр', photo: 'img/sayandinova.jpg' },
+      route: [{ label: '2 этаж', icon: 'elevator' }, { label: 'Каб. 214', dir: 'right' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

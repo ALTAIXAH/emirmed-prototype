@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Город и филиалы</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div style="position: absolute; left: 20px; right: 20px; top: 52px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+    <a href="Onb-Care.dc.html" aria-label="Назад" class="back"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-left" size="{{ s22 }}"></x-import></a>
+    <div class="dots" role="img" aria-label="Шаг 3 из 4"><i></i><i></i><i class="on"></i><i></i></div>
+    <a href="Onb-Start.dc.html" style="padding: 12px 4px; font: 600 15px/20px var(--font-sans); color: var(--emerald);">Пропустить</a>
+  </div>
+
+  <div style="position: absolute; left: 20px; right: 20px; top: 112px; display: grid; gap: 12px;">
+    <div>
+      <h1 class="h1">Где вам удобнее?</h1>
+      <p class="lead">Покажем филиалы, врачей и цены в вашем городе.</p>
+    </div>
+    <x-import component-from-global-scope="EmirMed.SegmentedControl" label="Город" options="{{ cities }}" value="{{ city }}" on-change="{{ setCity }}"></x-import>
+    <x-import component-from-global-scope="EmirMed.Button" variant="secondary" size="md" icon="pin" block="{{ yes }}">Найти ближайший филиал</x-import>
+    <div class="sec"><h2>Филиалы · {{ city }}</h2><span class="muted">{{ countLabel }}</span></div>
+    <sc-for list="{{ branches }}" as="b" hint-placeholder-count="3">
+      <x-import component-from-global-scope="EmirMed.BranchCard" layout="row" city="{{ b.city }}" address="{{ b.address }}" photo="{{ b.photo }}" open24="{{ b.open24 }}"></x-import>
+    </sc-for>
+  </div>
+
+  <a href="Onb-Start.dc.html" class="em-btn em-btn--primary" style="position: absolute; left: 20px; right: 20px; bottom: 34px;">Дальше</a>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const city = (this.state && this.state.city) || 'Алматы';
+    const all = {
+      'Алматы': [
+        { address: 'мкр Айнабулак-2, 84Б', photo: 'img/branch-ainabulak.jpg', open24: true },
+        { address: 'ул. Нусупбекова, 26/1', photo: 'img/branch-nusupbekova.jpg' },
+        { address: 'ул. Манаса, 53а', photo: 'img/branch-manasa.jpg' }
+      ],
+      'Астана': [
+        { address: 'ул. Куйши Дина, 9', photo: 'img/branch-kuishi-dina.jpg' },
+        { address: 'ул. Сауран, 1', photo: 'img/branch-sauran.jpg' }
+      ],
+      'Шымкент': [
+        { address: 'ул. Рашидова, 36/15', photo: 'img/branch-rashidova.jpg' },
+        { address: 'ул. Еримбетова, 44', photo: 'img/branch-erimbetova.jpg' }
+      ]
+    };
+    const counts = { 'Алматы': 'ещё 5 на карте', 'Астана': '2 филиала', 'Шымкент': '2 филиала' };
+    return {
+      yes: true,
+      s22: 22,
+      city: city,
+      cities: ['Алматы', 'Астана', 'Шымкент'],
+      countLabel: counts[city],
+      branches: all[city].map((b) => Object.assign({ city: city }, b)),
+      setCity: (v) => this.setState({ city: v })
+    };
+  }
+}
+</script>
+</body>
+</html>

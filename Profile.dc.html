@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Профиль</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll">
+    <div style="display: flex; align-items: center; gap: 14px; min-height: 64px;">
+      <x-import component-from-global-scope="EmirMed.Avatar" name="Алия Жумабаева" size="{{ s56 }}"></x-import>
+      <div style="flex: 1; min-width: 0;"><div class="em-top__name">Алия Жумабаева</div><div class="em-top__hello">+7 (701) ***-**-78</div></div>
+      <x-import component-from-global-scope="EmirMed.Button" variant="quiet" size="md" icon="bell" aria-label="Уведомления"></x-import>
+    </div>
+    <div class="sec"><h2>Семья</h2><span class="muted">запись за всех</span></div>
+    <x-import component-from-global-scope="EmirMed.Stories" label="Семья" items="{{ family }}"></x-import>
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.BonusCard" amount="{{ bonus }}" label=" бонусов" text="Скидка по карте 10% · карта и акции"></x-import>
+      <a class="hit" href="Bonus.dc.html" aria-label="Карта, бонусы и акции"></a>
+    </div>
+    <div class="em-card em-list">
+      <x-import component-from-global-scope="EmirMed.ListRow" icon="user" title="Мои данные" subtitle="ИИН, телефон, язык"></x-import>
+      <x-import component-from-global-scope="EmirMed.ListRow" icon="headset" title="Поддержка 24/7" subtitle="Чат и звонок"></x-import>
+      <x-import component-from-global-scope="EmirMed.ListRow" icon="building" title="Мой филиал" value="Нусупбекова"></x-import>
+      <x-import component-from-global-scope="EmirMed.ListRow" icon="logout" title="Выйти" danger="{{ yes }}" chevron="{{ no }}"></x-import>
+    </div>
+  </div>
+  <div class="em-screen__fade" style="height: 104px;"></div>
+  <div class="em-screen__tab"><x-import component-from-global-scope="EmirMed.TabBar" default-value="profile"></x-import></div>
+  <nav class="tablinks" aria-label="Разделы">
+    <a href="Home-Returning.dc.html" aria-label="Главная"></a>
+    <a href="Visit-Pass.dc.html" aria-label="Визиты"></a>
+    <a href="Book-Doctors.dc.html" aria-label="Записаться"></a>
+    <a href="Health.dc.html" aria-label="Здоровье"></a>
+    <a href="Profile.dc.html" aria-label="Профиль"></a>
+  </nav>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true,
+      no: false,
+      s56: 56,
+      bonus: 2450,
+      family: [
+        { label: 'Алия', icon: 'user', tone: 'emerald', seen: true },
+        { label: 'Арман', icon: 'user', tone: 'oak' },
+        { label: 'Айлин', icon: 'heart', tone: 'olive' },
+        { label: 'Мама', icon: 'heart', tone: 'oak', seen: true },
+        { label: 'Добавить', icon: 'plus', tone: 'emerald', seen: true }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

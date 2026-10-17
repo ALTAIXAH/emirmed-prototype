@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Карта, бонусы и акции</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll scroll--end">
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.TopBar" variant="nav" title="Бонусы и акции" action="qr" action-label="Показать QR на кассе"></x-import>
+      <a class="hit-left" href="Profile.dc.html" aria-label="Назад"></a>
+    </div>
+    <x-import component-from-global-scope="EmirMed.DiscountCard" tier="Постоянный пациент" discount="{{ discount }}" bonus="{{ bonus }}" holder="Алия Жумабаева" number="0412 7790 3315" progress="{{ progress }}"></x-import>
+    <div class="sec"><h2>Акции</h2><span class="muted">до 31 октября</span></div>
+    <div class="list">
+      <a class="row" href="Book-Doctors.dc.html">
+        <img class="ico" src="img/labs.svg" alt="">
+        <span class="row__body"><span class="row__t">Общий анализ крови</span><span class="row__s">Месяц анализов · −20%</span></span>
+        <span class="row__end">2 400 ₸<span class="row__old">3 000 ₸</span></span>
+      </a>
+      <a class="row" href="Book-Doctors.dc.html">
+        <img class="ico" src="img/dentist.svg" alt="">
+        <span class="row__body"><span class="row__t">КТ 3D зубочелюстной</span><span class="row__s">Ночной тариф 17:00–10:00</span></span>
+        <span class="row__end">15 600 ₸<span class="row__old">19 500 ₸</span></span>
+      </a>
+      <a class="row" href="Book-Doctors.dc.html">
+        <img class="ico" src="img/mri-icon.svg" alt="">
+        <span class="row__body"><span class="row__t">КТ брюшной полости</span><span class="row__s">+825 бонусов на карту</span></span>
+        <span class="row__end">16 500 ₸</span>
+      </a>
+    </div>
+    <div class="list">
+      <div class="row">
+        <img class="ico" src="img/gift.svg" alt="">
+        <span class="row__body"><span class="row__t">Как работает программа</span><span class="row__s">Скидка по карте и бонусы с каждой оплаты</span></span>
+        <span class="row__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      s20: 20,
+      discount: 10,
+      bonus: 2450,
+      progress: { value: 0.62, label: 'До скидки 15% осталось 18 500 ₸' }
+    };
+  }
+}
+</script>
+</body>
+</html>

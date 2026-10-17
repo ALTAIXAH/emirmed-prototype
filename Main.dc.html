@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Добро пожаловать</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="em-login__photo" style="height: 490px;">
+    <img src="img/lobby.jpg" alt="Холл филиала EMIRMED: светлый мрамор и зелёные диваны">
+  </div>
+  <div class="em-login__brand" style="top: 58px;">
+    <span class="em-login__mark"><x-import component-from-global-scope="EmirMed.Logo" variant="mark" height="{{ logoH }}"></x-import></span>
+    <span>EMIRMED</span>
+  </div>
+  <div class="em-login__sheet" style="top: 456px; gap: 12px; padding: 26px 24px 34px;">
+    <h1 class="em-login__title" style="font-size: 28px; line-height: 34px;">С заботой о вас 24/7</h1>
+    <p class="em-login__lead" style="margin: -4px 0 0;">Запись, анализы и забота о всей семье — в одном приложении.</p>
+    <p style="margin: 0; font: 500 13px/18px var(--font-sans); color: var(--ink-3);">15 клиник · 1 600 специалистов · с 2012 года</p>
+    <x-import component-from-global-scope="EmirMed.SegmentedControl" label="Язык приложения" options="{{ langs }}" default-value="Русский"></x-import>
+    <div style="flex-grow: 1;"></div>
+    <a href="Onb-Care.dc.html" class="em-btn em-btn--primary em-btn--block">Начать</a>
+    <p style="margin: 0; text-align: center; font: 400 13px/18px var(--font-sans); color: var(--ink-3);">Без регистрации — войти по номеру можно позже</p>
+  </div>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { logoH: 24, langs: ['Русский', 'Қазақша'] };
+  }
+}
+</script>
+</body>
+</html>

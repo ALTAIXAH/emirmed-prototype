@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Визит · живая очередь</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll scroll--dock">
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.TopBar" variant="nav" title="У кабинета" action="phone" action-label="Позвонить в регистратуру"></x-import>
+      <a class="hit-left" href="Visit-Pass.dc.html" aria-label="Назад"></a>
+    </div>
+    <x-import component-from-global-scope="EmirMed.QueueStatus" ahead="{{ ahead }}" minutes="{{ minutes }}" doctor="Саяндинова Н. А. · педиатр" room="Каб. 214" delay="Врач задерживается на 10 минут — сообщили заранее, чтобы вы не ждали в коридоре." actions="{{ queueActions }}"></x-import>
+    <x-import component-from-global-scope="EmirMed.AiCard" label="Мы рядом" title="Ждёте дольше 15 минут?" note="{{ no }}">
+      <p style="margin: 0; font: 400 14px/20px var(--font-sans); color: var(--ink-2);">Сообщите — старший администратор подойдёт, пока вы в клинике.</p>
+      <div class="em-est__btns">
+        <x-import component-from-global-scope="EmirMed.Button" variant="primary" size="md" icon="message">Сообщить</x-import>
+        <x-import component-from-global-scope="EmirMed.Button" variant="ghost" size="md">Всё хорошо</x-import>
+      </div>
+    </x-import>
+  </div>
+  <div class="em-screen__dock">
+    <a class="em-btn em-btn--secondary" href="Visit-Estimate.dc.html">Врач пригласил в кабинет</a>
+  </div>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const E = window.EmirMed;
+    const h = window.React.createElement;
+    return {
+      no: false,
+      ahead: 2,
+      minutes: 12,
+      queueActions: [
+        h(E.Button, { key: 'away', variant: 'secondary', size: 'md' }, 'Отойду'),
+        h(E.Button, { key: 'late', variant: 'outline', size: 'md' }, 'Опаздываю')
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

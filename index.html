@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>EMIRMED — прототип приложения</title>
+<link rel="icon" href="img/calendar.svg" type="image/svg+xml">
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--canvas); color: var(--ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 40px 32px 48px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 56px; align-items: start; }
+  .eyebrow { margin: 0; font: 600 14px/1 var(--font-sans); letter-spacing: .1em; text-transform: uppercase; color: var(--emerald); }
+  h1 { margin: 14px 0 0; font: 600 44px/1.1 var(--font-display); letter-spacing: -0.03em; }
+  .lead { margin: 14px 0 0; max-width: 560px; font: 400 18px/1.5 var(--font-sans); color: var(--ink-2); }
+  h2 { margin: 36px 0 12px; font: 600 20px/1.2 var(--font-display); letter-spacing: -0.01em; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { appearance: none; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; height: 44px; padding: 0 16px; font: 600 15px/1 var(--font-sans); cursor: pointer; }
+  .chip:hover { border-color: var(--field-line); }
+  .chip[aria-pressed="true"] { background: var(--emerald-soft); border-color: var(--emerald); color: var(--emerald); }
+  .chip:focus-visible, .btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .feats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 10px; }
+  .feats li { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 20px; background: var(--surface); box-shadow: var(--shadow-card); }
+  .feats img { width: 44px; height: 44px; flex: none; }
+  .feats b { display: block; font: 600 16px/1.3 var(--font-sans); }
+  .feats span { display: block; margin-top: 2px; font: 400 14px/1.4 var(--font-sans); color: var(--ink-2); }
+  .note { margin: 28px 0 0; font: 400 13px/1.5 var(--font-sans); color: var(--ink-3); }
+  .stage { position: sticky; top: 24px; grid-column: 2; grid-row: 1 / span 2; display: grid; justify-items: center; gap: 14px; }
+  .phone { width: calc(417px * var(--s, 1)); height: calc(876px * var(--s, 1)); }
+  .bezel { width: 417px; height: 876px; padding: 12px; border-radius: 64px; background: var(--ink); box-shadow: 0 40px 90px rgba(23, 32, 51, .22); transform: scale(var(--s, 1)); transform-origin: 0 0; }
+  .bezel iframe { display: block; width: 393px; height: 852px; border: 0; border-radius: 52px; background: var(--canvas); }
+  .controls { display: flex; gap: 8px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 18px; border-radius: 999px; border: 0; background: var(--emerald-soft); color: var(--emerald); font: 600 15px/1 var(--font-sans); text-decoration: none; cursor: pointer; }
+  .btn--main { background: var(--emerald); color: var(--on-emerald); }
+  .open-full { display: none; }
+  @media (max-width: 900px) {
+    .wrap { grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 24px 16px 40px; }
+    h1 { font-size: 32px; }
+    .lead { font-size: 16px; }
+    .stage { position: static; grid-column: auto; grid-row: auto; order: -1; }
+    .intro { order: -2; }
+    .open-full { display: inline-flex; }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="intro">
+    <p class="eyebrow">Концепт приложения</p>
+    <h1>EMIRMED — личная клиника семьи в телефоне</h1>
+    <p class="lead">Кликабельный прототип из 22 экранов. Нажимайте на кнопки, карточки, сторис и вкладки внизу — всё работает как в настоящем приложении.</p>
+    <a class="btn btn--main open-full" href="Main.dc.html" style="margin-top:16px">Открыть прототип на весь экран</a>
+    <h2>С чего начать</h2>
+    <div class="chips" role="group" aria-label="Сценарии прототипа">
+      <button type="button" class="chip" data-src="Main.dc.html" aria-pressed="true">Онбординг</button>
+      <button type="button" class="chip" data-src="Home-New.dc.html" aria-pressed="false">Новый пациент</button>
+      <button type="button" class="chip" data-src="Home-Returning.dc.html" aria-pressed="false">Уже был на приёме</button>
+      <button type="button" class="chip" data-src="Home-Care.dc.html" aria-pressed="false">Записан и наблюдается</button>
+      <button type="button" class="chip" data-src="Book-Doctors.dc.html" aria-pressed="false">Запись и оплата</button>
+      <button type="button" class="chip" data-src="Visit-Pass.dc.html" aria-pressed="false">День визита</button>
+      <button type="button" class="chip" data-src="Health-Lab.dc.html" aria-pressed="false">Анализы</button>
+      <button type="button" class="chip" data-src="AI-Chat.dc.html" aria-pressed="false">Помощник 24/7</button>
+      <button type="button" class="chip" data-src="Bonus.dc.html" aria-pressed="false">Бонусы и акции</button>
+      <button type="button" class="chip" data-src="Profile.dc.html" aria-pressed="false">Семья и профиль</button>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="phone"><div class="bezel"><iframe id="app" src="Main.dc.html" title="Прототип приложения EMIRMED"></iframe></div></div>
+    <div class="controls">
+      <button type="button" class="btn" id="back">Назад</button>
+      <button type="button" class="btn" id="restart">В начало</button>
+      <a class="btn btn--main open-full" href="Main.dc.html">Открыть на весь экран</a>
+    </div>
+  </div>
+  <div>
+    <h2 style="margin-top:0">Что умеет приложение</h2>
+    <ul class="feats">
+      <li><img src="img/calendar.svg" alt=""><div><b>Запись за минуту</b><span>Врач, время и цена — сразу. Цена фиксируется при записи</span></div></li>
+      <li><img src="img/gift.svg" alt=""><div><b>Скидка и бонусы</b><span>Карта EMIRMED, бонусы с каждой оплаты, оплата Kaspi</span></div></li>
+      <li><img src="img/pin.svg" alt=""><div><b>День визита без очередей</b><span>Пропуск, маршрут табличками и живая очередь</span></div></li>
+      <li><img src="img/results.svg" alt=""><div><b>Честный счёт</b><span>Врач предлагает — пациент решает в приложении</span></div></li>
+      <li><img src="img/labs.svg" alt=""><div><b>Анализы простыми словами</b><span>Результат с пояснением и следующим шагом</span></div></li>
+      <li><img src="img/heart.svg" alt=""><div><b>Наблюдение</b><span>Давление, лекарства и план врача между визитами</span></div></li>
+      <li><img src="img/assistant.svg" alt=""><div><b>Помощник 24/7</b><span>Подскажет врача по-русски и қазақша</span></div></li>
+      <li><img src="img/star.svg" alt=""><div><b>Обратная связь</b><span>Отзыв сразу попадает к руководителю филиала</span></div></li>
+      <li><img src="img/family.svg" alt=""><div><b>Вся семья</b><span>Запись за детей и родителей в одном приложении</span></div></li>
+    </ul>
+    <p class="note">Концепт-прототип, октябрь 2026. Имена пациентов, цены, время приёмов и правила бонусов — примеры.</p>
+  </div>
+</main>
+<script>
+  (function () {
+    var app = document.getElementById('app');
+    var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+    function fit() {
+      var wide = window.innerWidth > 900;
+      var byH = (window.innerHeight - (wide ? 110 : 140)) / 876;
+      var byW = (window.innerWidth - 32) / 417;
+      var s = Math.max(0.5, Math.min(1, wide ? byH : Math.min(byW, Math.max(byH, 0.62))));
+      document.documentElement.style.setProperty('--s', s.toFixed(3));
+    }
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        chips.forEach(function (x) { x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); });
+        app.src = c.getAttribute('data-src');
+      });
+    });
+    document.getElementById('back').addEventListener('click', function () { try { app.contentWindow.history.back(); } catch (e) {} });
+    document.getElementById('restart').addEventListener('click', function () { chips[0].click(); });
+    window.addEventListener('resize', fit);
+    fit();
+  })();
+</script>
+</body>
+</html>

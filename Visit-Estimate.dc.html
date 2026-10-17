@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Визит · смета и согласие</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll scroll--dock">
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.TopBar" variant="nav" title="Идёт приём"></x-import>
+      <a class="hit-left" href="Visit-Queue.dc.html" aria-label="Назад"></a>
+    </div>
+    <div class="em-card" style="padding: 12px 14px; display: flex; align-items: center; gap: 12px;">
+      <x-import component-from-global-scope="EmirMed.Avatar" src="img/sayandinova.jpg" name="Саяндинова Назгуль" size="{{ s44 }}" zoom="{{ zoom }}" focus="50% 36%"></x-import>
+      <div style="flex: 1; min-width: 0;"><div class="em-sum__value">Приём педиатра</div><div class="em-sum__label">Нусупбекова, 26/1 · сейчас</div></div>
+      <x-import component-from-global-scope="EmirMed.Wayfinding" label="Каб. 214"></x-import>
+    </div>
+    <x-import component-from-global-scope="EmirMed.CostEstimate" items="{{ items }}" proposal="{{ proposal }}" total="{{ total }}" guarantee="Без вашего согласия в счёт ничего не добавят"></x-import>
+  </div>
+  <div class="em-screen__dock em-screen__dock--col">
+    <a class="em-btn em-btn--primary em-btn--block" href="Visit-After.dc.html">Приём завершён</a>
+    <div class="dock-note">Приём оплачен заранее · к кассе не нужно</div>
+  </div>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      s44: 44,
+      zoom: 2.4,
+      items: [{ name: 'Приём педиатра · оплачен', price: 6300 }],
+      proposal: { name: 'Общий анализ крови', price: 2160, why: 'Врач предлагает анализ, чтобы исключить бактериальную инфекцию. Он не обязателен — можно сначала обсудить.' },
+      total: 6300
+    };
+  }
+}
+</script>
+</body>
+</html>

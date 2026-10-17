@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Запись · готово</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="confetti" aria-hidden="true">
+    <i style="--dx: -130px; --dy: -150px; background: #E2C08A;"></i>
+    <i style="--dx: -80px; --dy: -190px; background: #17644A;"></i>
+    <i style="--dx: -30px; --dy: -170px; background: #F39EA4;"></i>
+    <i style="--dx: 40px; --dy: -200px; background: #4DBB8C;"></i>
+    <i style="--dx: 95px; --dy: -160px; background: #C9A27A;"></i>
+    <i style="--dx: 140px; --dy: -120px; background: #17644A;"></i>
+    <i style="--dx: -150px; --dy: -60px; background: #4DBB8C;"></i>
+    <i style="--dx: 150px; --dy: -40px; background: #E2C08A;"></i>
+    <i style="--dx: -110px; --dy: 40px; background: #F39EA4;"></i>
+    <i style="--dx: 120px; --dy: 60px; background: #70AB79;"></i>
+  </div>
+  <div style="position: absolute; left: 20px; right: 20px; top: 96px; display: grid; justify-items: center; gap: 12px; text-align: center;">
+    <div class="okmark" aria-hidden="true"><span class="okmark__ring"></span><span class="okmark__ring"></span><span class="okmark__disc"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M11 21l6 6 12-13" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+    <h1 class="h1 popin" style="margin-top: 10px;">Айлин записана</h1>
+    <p class="lead" style="margin: 0; max-width: 300px;">Пт, 16 октября в 10:30 · педиатр Саяндинова Н. А. Напомним накануне и за 2 часа.</p>
+    <div class="list" style="width: 100%; text-align: left; margin-top: 8px;">
+      <div class="row">
+        <img class="ico" src="img/calendar.svg" alt="">
+        <span class="row__body"><span class="row__t">Добавить в календарь</span><span class="row__s">Чтобы не пересечься с делами</span></span>
+        <span class="row__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </div>
+      <div class="row">
+        <img class="ico" src="img/pin.svg" alt="">
+        <span class="row__body"><span class="row__t">Как добраться</span><span class="row__s">Нусупбекова, 26/1 · 1,2 км</span></span>
+        <span class="row__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </div>
+      <div class="row">
+        <img class="ico" src="img/gift.svg" alt="">
+        <span class="row__body"><span class="row__t">+315 бонусов</span><span class="row__s">Начислим после визита</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="em-screen__dock">
+    <a class="em-btn em-btn--primary" href="Home-Care.dc.html">На главную</a>
+  </div>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { s20: 20 };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Здоровье</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll">
+    <div class="em-screen__h1">
+      <h1>Здоровье</h1>
+      <x-import component-from-global-scope="EmirMed.Button" variant="quiet" size="md" icon="users" aria-label="Выбрать члена семьи"></x-import>
+    </div>
+    <x-import component-from-global-scope="EmirMed.SegmentedControl" label="Раздел" options="{{ tabs }}"></x-import>
+    <div class="em-card rel" style="padding: 2px 0;">
+      <x-import component-from-global-scope="EmirMed.LabResult" status="attention" name="Ферритин" date="14 окт" note="Ниже нормы — объяснили простыми словами" on-open="{{ noop }}"></x-import>
+      <hr class="em-divider" style="margin: 0 16px;">
+      <x-import component-from-global-scope="EmirMed.LabResult" status="progress" name="Витамин D (25-OH)" note="Будет готов завтра"></x-import>
+      <a class="hit" href="Health-Lab.dc.html" aria-label="Открыть анализ крови"></a>
+    </div>
+    <div class="sec"><h2>Важно для врачей</h2></div>
+    <div class="em-card em-list">
+      <x-import component-from-global-scope="EmirMed.ListRow" icon="alert" title="Аллергия" value="Пенициллин"></x-import>
+      <x-import component-from-global-scope="EmirMed.ListRow" icon="file" title="Справки и выписки" subtitle="086/у, в бассейн, в школу"></x-import>
+      <x-import component-from-global-scope="EmirMed.ListRow" icon="shield" title="Кому открыта медкарта" value="2 врача"></x-import>
+    </div>
+  </div>
+  <div class="em-screen__fade" style="height: 104px;"></div>
+  <div class="em-screen__tab"><x-import component-from-global-scope="EmirMed.TabBar" default-value="health"></x-import></div>
+  <nav class="tablinks" aria-label="Разделы">
+    <a href="Home-Returning.dc.html" aria-label="Главная"></a>
+    <a href="Visit-Pass.dc.html" aria-label="Визиты"></a>
+    <a href="Book-Doctors.dc.html" aria-label="Записаться"></a>
+    <a href="Health.dc.html" aria-label="Здоровье"></a>
+    <a href="Profile.dc.html" aria-label="Профиль"></a>
+  </nav>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { noop: () => {}, tabs: ['Анализы', 'Назначения', 'Документы'] };
+  }
+}
+</script>
+</body>
+</html>

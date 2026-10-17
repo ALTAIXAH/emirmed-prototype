@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Анализ простыми словами</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll scroll--end">
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.TopBar" variant="nav" title="Анализ крови" action="file" action-label="PDF"></x-import>
+      <a class="hit-left" href="Health.dc.html" aria-label="Назад"></a>
+    </div>
+    <x-import component-from-global-scope="EmirMed.AiCard" title="Почти всё в норме" aside="Готов 14 окт">
+      <p style="margin: 0; font: 400 15px/22px var(--font-sans); color: var(--ink-2);">Гемоглобин и лейкоциты в норме. Ферритин ниже нормы — так бывает при нехватке железа, отсюда может быть усталость. Обсудите это с терапевтом.</p>
+      <a class="em-btn em-btn--primary em-btn--md em-btn--block" href="Book-Doctors.dc.html">Записаться к терапевту</a>
+    </x-import>
+    <div class="em-card" style="padding: 4px 16px;">
+      <x-import component-from-global-scope="EmirMed.LabValue" name="Ферритин" value="{{ fer }}" unit="нг/мл" min="{{ ferMin }}" max="{{ ferMax }}"></x-import>
+      <x-import component-from-global-scope="EmirMed.LabValue" name="Гемоглобин" value="{{ hb }}" unit="г/л" min="{{ hbMin }}" max="{{ hbMax }}"></x-import>
+      <x-import component-from-global-scope="EmirMed.LabValue" name="Лейкоциты" value="{{ wbc }}" unit="×10⁹/л" min="{{ wbcMin }}" max="{{ wbcMax }}"></x-import>
+    </div>
+  </div>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { fer: 9, ferMin: 13, ferMax: 150, hb: 128, hbMin: 120, hbMax: 160, wbc: 6.2, wbcMin: 4, wbcMax: 9 };
+  }
+}
+</script>
+</body>
+</html>

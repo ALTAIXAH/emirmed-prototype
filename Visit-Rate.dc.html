@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Оценка визита</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll scroll--dock">
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.TopBar" variant="nav" title="Оценка визита" action="close" action-label="Закрыть"></x-import>
+      <a class="hit-left" href="Visit-After.dc.html" aria-label="Назад"></a>
+      <a class="hit-right" href="Home-Returning.dc.html" aria-label="Закрыть"></a>
+    </div>
+    <x-import component-from-global-scope="EmirMed.FeedbackPrompt" who="{{ who }}" default-rating="{{ rating }}" default-reasons="{{ reasons }}" options="{{ options }}" comment="Ждали 20 минут после времени записи, в остальном всё хорошо."></x-import>
+  </div>
+  <div class="em-screen__dock em-screen__dock--col">
+    <button type="button" class="em-btn em-btn--primary em-btn--block" onClick="{{ send }}">Отправить</button>
+    <div class="dock-note">Прочитает руководитель филиала, ответим сегодня</div>
+  </div>
+
+  <sc-if value="{{ sending }}" hint-placeholder-val="{{ no }}">
+    <div class="overlay">
+      <div class="sheet" role="status">
+        <div class="spinner" aria-hidden="true"></div>
+        <h2 class="sheet__t">Отправляем</h2>
+        <p class="sheet__s">Передаём отзыв руководителю филиала на Нусупбекова</p>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ sent }}" hint-placeholder-val="{{ no }}">
+    <div class="overlay">
+      <div class="sheet" role="status">
+        <img class="popin" src="img/star.svg" alt="" style="width: 88px; height: 88px;">
+        <h2 class="sheet__t">Спасибо, что рассказали</h2>
+        <p class="sheet__s">Динара С., руководитель филиала, ответит сегодня до 18:00. За ожидание начислили 1 000 бонусов.</p>
+        <a class="em-btn em-btn--primary em-btn--block" href="Home-Returning.dc.html">На главную</a>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    const st = this.state || {};
+    return {
+      no: false,
+      sending: st.stage === 'sending',
+      sent: st.stage === 'sent',
+      send: () => {
+        this.setState({ stage: 'sending' });
+        clearTimeout(this._t);
+        this._t = setTimeout(() => this.setState({ stage: 'sent' }), 1300);
+      },
+      who: { name: 'Визит 16 октября', meta: 'Нусупбекова, 26/1 · педиатр', photo: 'img/branch-nusupbekova.jpg' },
+      rating: 3,
+      reasons: ['Долго ждал'],
+      options: ['Долго ждал', 'Отношение персонала', 'Цена и счёт', 'Врач и лечение', 'Регистратура и касса', 'Документы']
+    };
+  }
+}
+</script>
+</body>
+</html>
