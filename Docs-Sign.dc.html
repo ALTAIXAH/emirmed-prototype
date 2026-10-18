@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Документы перед визитом</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll scroll--dock">
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.TopBar" variant="nav" title="Документы"></x-import>
+      <a class="hit-left" href="Home-Care.dc.html" aria-label="Назад"></a>
+    </div>
+    <section class="hero">
+      <div>
+        <div class="hero__eyebrow">Перед визитом · Пт, 16 октября</div>
+        <h2 class="hero__t">Подпишите заранее — дома</h2>
+        <p class="hero__s">У регистратуры ничего заполнять не придётся</p>
+      </div>
+    </section>
+    <div class="list">
+      <sc-for list="{{ docs }}" as="d" hint-placeholder-count="3">
+        <div class="row">
+          <img class="ico" src="img/results.svg" alt="">
+          <span class="row__body"><span class="row__t">{{ d.title }}</span><span class="row__s">{{ d.sub }}</span></span>
+          <sc-if value="{{ signed }}" hint-placeholder-val="{{ no }}"><span class="tag tag--ok popin">Подписан</span></sc-if>
+          <sc-if value="{{ unsigned }}" hint-placeholder-val="{{ yes }}"><span class="tag tag--warn">Ждёт</span></sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <div class="list">
+      <div class="row">
+        <x-import component-from-global-scope="EmirMed.Checkbox" checked="{{ read }}" on-change="{{ toggleRead }}"></x-import>
+        <span class="row__body"><span class="row__t">Я прочитала документы</span><span class="row__s">Открыть можно в любой момент</span></span>
+      </div>
+    </div>
+    <p class="dock-note" style="margin: 0; text-align: left;">Подпись ЭЦП в eGov mobile — юридически равна подписи на бумаге. Копии сохранятся в разделе «Документы».</p>
+  </div>
+  <div class="em-screen__dock em-screen__dock--col">
+    <sc-if value="{{ unsigned }}" hint-placeholder-val="{{ yes }}">
+      <button type="button" class="em-btn em-btn--primary em-btn--block" onClick="{{ sign }}" style="{{ btnStyle }}">Подписать в eGov mobile</button>
+    </sc-if>
+    <sc-if value="{{ signed }}" hint-placeholder-val="{{ no }}">
+      <a class="em-btn em-btn--primary em-btn--block" href="Home-Care.dc.html">Готово</a>
+    </sc-if>
+    <div class="dock-note">{{ note }}</div>
+  </div>
+
+  <sc-if value="{{ waiting }}" hint-placeholder-val="{{ no }}">
+    <div class="overlay">
+      <div class="sheet" role="status">
+        <div class="spinner" aria-hidden="true"></div>
+        <h2 class="sheet__t">Подтвердите в eGov mobile</h2>
+        <p class="sheet__s">Мы отправили 3 документа. Откройте уведомление, проверьте текст и подтвердите по Face ID.</p>
+        <div class="progress" aria-hidden="true"><i></i></div>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ done }}" hint-placeholder-val="{{ no }}">
+    <div class="overlay">
+      <div class="sheet" role="status">
+        <div class="okmark" aria-hidden="true"><span class="okmark__ring"></span><span class="okmark__ring"></span><span class="okmark__disc"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M11 21l6 6 12-13" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+        <h2 class="sheet__t">Подписано 3 документа</h2>
+        <p class="sheet__s">Клиника получила подписи. К визиту всё готово.</p>
+        <button type="button" class="em-btn em-btn--primary em-btn--block" onClick="{{ close }}">Хорошо</button>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    const st = this.state || {};
+    const stage = st.stage || 'idle';
+    const read = !!st.read;
+    const signed = stage === 'signed' || stage === 'done';
+    return {
+      yes: true,
+      no: false,
+      read: read,
+      signed: signed,
+      unsigned: !signed,
+      waiting: stage === 'waiting',
+      done: stage === 'done',
+      btnStyle: read ? '' : 'opacity: .45;',
+      note: signed ? 'Копии в профиле · раздел «Документы»' : (read ? 'Откроется eGov mobile на этом телефоне' : 'Сначала отметьте, что прочитали документы'),
+      docs: [
+        { title: 'Договор на услуги', sub: 'Платные медуслуги · 2 страницы' },
+        { title: 'Согласие на осмотр', sub: 'Айлин · подписывает мама' },
+        { title: 'Обработка данных', sub: 'Медтайна и персональные данные' }
+      ],
+      toggleRead: (v) => this.setState({ read: v }),
+      sign: () => {
+        if (!read) return;
+        this.setState({ stage: 'waiting' });
+        clearTimeout(this._t);
+        this._t = setTimeout(() => this.setState({ stage: 'done' }), 2300);
+      },
+      close: () => this.setState({ stage: 'signed' })
+    };
+  }
+}
+</script>
+</body>
+</html>

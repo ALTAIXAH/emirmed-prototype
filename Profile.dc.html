@@ -35,6 +35,23 @@ a{color:#17644a}a:hover{color:#0e3b2d}
       <x-import component-from-global-scope="EmirMed.BonusCard" amount="{{ bonus }}" label=" бонусов" text="Скидка по карте 10% · карта и акции"></x-import>
       <a class="hit" href="Bonus.dc.html" aria-label="Карта, бонусы и акции"></a>
     </div>
+    <div class="list">
+      <a class="row" href="Health-Path.dc.html">
+        <img class="ico" src="img/star.svg" alt="">
+        <span class="row__body"><span class="row__t">Путь здоровья</span><span class="row__s">Уровень 2 · ещё 3 шага до скидки 15%</span></span>
+        <span class="row__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </a>
+      <a class="row" href="Sub.dc.html">
+        <img class="ico" src="img/family.svg" alt="">
+        <span class="row__body"><span class="row__t">Программы наблюдения</span><span class="row__s">Педиатр на год, давление, семья</span></span>
+        <span class="row__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </a>
+      <a class="row" href="Docs-Sign.dc.html">
+        <img class="ico" src="img/results.svg" alt="">
+        <span class="row__body"><span class="row__t">Документы</span><span class="row__s">Договоры и согласия · 3 ждут подписи</span></span>
+        <span class="row__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </a>
+    </div>
     <div class="em-card em-list">
       <x-import component-from-global-scope="EmirMed.ListRow" icon="user" title="Мои данные" subtitle="ИИН, телефон, язык"></x-import>
       <x-import component-from-global-scope="EmirMed.ListRow" icon="headset" title="Поддержка 24/7" subtitle="Чат и звонок"></x-import>
@@ -60,6 +77,7 @@ class Component extends DCLogic {
       yes: true,
       no: false,
       s56: 56,
+      s20: 20,
       bonus: 2450,
       family: [
         { label: 'Алия', icon: 'user', tone: 'emerald', seen: true },

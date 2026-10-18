@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Динамика анализов</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+.c-band{fill:var(--emerald-soft)}
+.c-grid{stroke:var(--line);stroke-width:1}
+.c-guide{stroke:var(--field-line);stroke-width:1;stroke-dasharray:3 4}
+.c-line{fill:none;stroke:var(--emerald);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.c-dot{fill:var(--emerald);stroke:var(--surface);stroke-width:2}
+.c-dot.out{fill:var(--warning)}
+.c-hit{fill:transparent;cursor:pointer}
+.c-norm{fill:var(--emerald) !important;font-weight:600 !important}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll scroll--end">
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.TopBar" variant="nav" title="Динамика анализов"></x-import>
+      <a class="hit-left" href="Health-Lab.dc.html" aria-label="Назад"></a>
+    </div>
+    <x-import component-from-global-scope="EmirMed.SegmentedControl" label="Показатель" options="{{ tabs }}" value="{{ k }}" on-change="{{ pick }}"></x-import>
+    <section class="em-card pad">
+      <div class="readout">
+        <span><span class="row__s" style="display:block">{{ selDate }}</span><b>{{ selVal }}</b> <span class="row__s" style="display:inline">{{ unit }}</span></span>
+        <sc-if value="{{ selOut }}" hint-placeholder-val="{{ no }}"><span class="tag tag--warn">Вне нормы</span></sc-if>
+        <sc-if value="{{ selIn }}" hint-placeholder-val="{{ yes }}"><span class="tag tag--ok">В норме</span></sc-if>
+      </div>
+      <div>{{ chart }}</div>
+      <div class="vals">
+        <sc-for list="{{ pts }}" as="p" hint-placeholder-count="4">
+          <button type="button" class="{{ p.btn }}" onClick="{{ p.pick }}">{{ p.d }}<b>{{ p.v }}</b></button>
+        </sc-for>
+      </div>
+    </section>
+    <div class="list">
+      <div class="row">
+        <img class="ico" src="img/labs.svg" alt="">
+        <span class="row__body"><span class="row__t">{{ summary }}</span><span class="row__s">{{ advice }}</span></span>
+      </div>
+      <a class="row" href="Health-Plan.dc.html">
+        <img class="ico" src="img/calendar.svg" alt="">
+        <span class="row__body"><span class="row__t">Что досдать и когда</span><span class="row__s">План врача на ближайшие месяцы</span></span>
+        <span class="row__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </a>
+    </div>
+  </div>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const D = {
+      fer: { name: 'Ферритин', unit: 'нг/мл', min: 13, max: 150, lo: 0, hi: 40, norm: 'Норма от 13',
+        values: [['Мар', '12 марта', 18], ['Июн', '10 июня', 14], ['Сен', '2 сентября', 11], ['Окт', '14 октября', 9]],
+        summary: 'Снизился с 18 до 9 за 7 месяцев', advice: 'Так бывает при нехватке железа. Врач назначил курс и повтор через 8 недель' },
+      hb: { name: 'Гемоглобин', unit: 'г/л', min: 120, max: 160, lo: 110, hi: 170, norm: 'Норма 120–160',
+        values: [['Мар', '12 марта', 136], ['Июн', '10 июня', 133], ['Сен', '2 сентября', 130], ['Окт', '14 октября', 128]],
+        summary: 'Стабильно в норме', advice: 'Небольшое снижение — врач посмотрит вместе с ферритином' },
+      vd: { name: 'Витамин D', unit: 'нг/мл', min: 30, max: 100, lo: 0, hi: 60, norm: 'Норма от 30',
+        values: [['Мар', '12 марта', 18], ['Июн', '10 июня', 22], ['Сен', '2 сентября', 27], ['Окт', '14 октября', 31]],
+        summary: 'Вырос с 18 до 31 — теперь в норме', advice: 'Курс работает. Спросите врача, нужно ли менять дозировку' }
+    };
+    const st = this.state || {};
+    const k = st.k || 'fer';
+    const d = D[k];
+    const n = d.values.length;
+    const sel = st.sel === undefined || st.sel >= n ? n - 1 : st.sel;
+    const X0 = 40, X1 = 318, Y0 = 18, Y1 = 158;
+    const y = (v) => Y1 - (v - d.lo) / (d.hi - d.lo) * (Y1 - Y0);
+    const pts = d.values.map((p, i) => {
+      const out = p[2] < d.min || p[2] > d.max;
+      return { d: p[0], full: p[1], v: p[2], out: out, x: X0 + i * (X1 - X0) / (n - 1), y: y(p[2]),
+        r: i === sel ? 7 : 5, cls: 'c-dot' + (out ? ' out' : ''), btn: i === sel ? 'on' : '',
+        pick: () => this.setState({ sel: i }) };
+    });
+    const top = y(Math.min(d.max, d.hi)), bottom = y(Math.max(d.min, d.lo));
+    const ticks = [d.lo, (d.lo + d.hi) / 2, d.hi].map((v) => ({ v: v, y: y(v), ty: y(v) + 4 }));
+    const s = pts[sel];
+    const h = window.React.createElement;
+    const kids = [
+      h('rect', { key: 'band', className: 'c-band', x: X0, y: top, width: X1 - X0, height: Math.max(0, bottom - top), rx: 6 }),
+      h('text', { key: 'norm', className: 'c-norm', x: X0 + 6, y: top + 14 }, d.norm)
+    ];
+    ticks.forEach((g, i) => {
+      kids.push(h('line', { key: 'g' + i, className: 'c-grid', x1: X0, x2: X1, y1: g.y, y2: g.y }));
+      kids.push(h('text', { key: 't' + i, x: X0 - 8, y: g.ty, textAnchor: 'end' }, String(g.v)));
+    });
+    kids.push(h('line', { key: 'guide', className: 'c-guide', x1: pts[sel].x, x2: pts[sel].x, y1: Y0, y2: Y1 }));
+    kids.push(h('polyline', { key: 'line', className: 'c-line', points: pts.map((p) => p.x + ',' + p.y).join(' ') }));
+    pts.forEach((p, i) => {
+      kids.push(h('circle', { key: 'd' + i, className: p.cls, cx: p.x, cy: p.y, r: p.r }));
+      kids.push(h('circle', { key: 'h' + i, className: 'c-hit', cx: p.x, cy: p.y, r: 20, onClick: p.pick }));
+      kids.push(h('text', { key: 'm' + i, x: p.x, y: 180, textAnchor: 'middle' }, p.d));
+    });
+    const aria = d.name + ': ' + d.values.map((p) => p[1] + ' — ' + p[2] + ' ' + d.unit).join(', ');
+    return {
+      yes: true, no: false, s20: 20,
+      chart: h('svg', { className: 'chart', viewBox: '0 0 350 196', role: 'img', 'aria-label': aria }, kids),
+      k: k,
+      tabs: [{ value: 'fer', label: 'Ферритин' }, { value: 'hb', label: 'Гемоглобин' }, { value: 'vd', label: 'Витамин D' }],
+      pick: (v) => this.setState({ k: v, sel: undefined }),
+      unit: d.unit,
+      selDate: s.full,
+      selVal: String(s.v).replace('.', ','),
+      selOut: s.out,
+      selIn: !s.out,
+      pts: pts,
+      summary: d.summary,
+      advice: d.advice
+    };
+  }
+}
+</script>
+</body>
+</html>

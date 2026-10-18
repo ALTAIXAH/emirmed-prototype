@@ -50,7 +50,8 @@
       var t = node.nodeValue;
       if (!t.trim()) return t.indexOf('\n') >= 0 ? null : t;
       var v = val(t, vals);
-      return v == null ? null : String(v);
+      if (v == null) return null;
+      return R.isValidElement(v) ? R.cloneElement(v, { key: key }) : String(v);
     }
     if (node.nodeType !== 1) return null;
     var tag = node.localName;

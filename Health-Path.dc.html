@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Путь здоровья</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+.lvl{display:flex;align-items:center;justify-content:space-between;gap:8px;font:600 13px/18px var(--font-sans);color:rgba(255,255,255,.86)}
+.step-btn{margin-top:8px}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll scroll--end">
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.TopBar" variant="nav" title="Путь здоровья"></x-import>
+      <a class="hit-left" href="Profile.dc.html" aria-label="Назад"></a>
+    </div>
+    <section class="hero">
+      <div>
+        <div class="hero__eyebrow">Уровень 2 · Забочусь регулярно</div>
+        <h2 class="hero__t">{{ heroTitle }}</h2>
+        <p class="hero__s">На уровне 3 — скидка 15% на приёмы для всей семьи</p>
+      </div>
+      <div class="meter" role="img" aria-label="{{ meterLabel }}"><i style="{{ meterStyle }}"></i></div>
+      <div class="lvl"><span>{{ doneCount }} из 5 шагов</span><span>Уровень 3</span></div>
+    </section>
+
+    <div class="sec"><h2>Шаги из плана врача</h2><span class="muted">октябрь</span></div>
+    <div class="list">
+      <div class="row">
+        <span class="tick on" aria-label="Выполнено"><x-import component-from-global-scope="EmirMed.Icon" name="check" size="{{ s18 }}"></x-import></span>
+        <span class="row__body"><span class="row__t">Приём педиатра</span><span class="row__s">Айлин · 16 октября</span></span>
+        <span class="plus">+200</span>
+      </div>
+      <div class="row" style="align-items: flex-start;">
+        <span class="{{ bpTick }}" aria-label="{{ bpLabel }}"><sc-if value="{{ bpDone }}" hint-placeholder-val="{{ no }}"><span class="popin" style="display: grid;"><x-import component-from-global-scope="EmirMed.Icon" name="check" size="{{ s18 }}"></x-import></span></sc-if></span>
+        <span class="row__body">
+          <span class="row__t">Давление 7 дней подряд</span>
+          <span class="row__s">{{ bpNote }}</span>
+          <span class="streak" aria-hidden="true"><sc-for list="{{ streak }}" as="d" hint-placeholder-count="7"><i class="{{ d.cls }}"></i></sc-for></span>
+          <sc-if value="{{ bpOpen }}" hint-placeholder-val="{{ yes }}">
+            <button type="button" class="em-btn em-btn--secondary em-btn--sm step-btn" onClick="{{ markToday }}">Отметить сегодня · 128/82</button>
+          </sc-if>
+        </span>
+        <span class="plus">+150</span>
+      </div>
+      <a class="row" href="Health-Plan.dc.html">
+        <span class="tick" aria-label="Не выполнено"></span>
+        <span class="row__body"><span class="row__t">Повторить ферритин</span><span class="row__s">Назначил врач · до 10 декабря</span></span>
+        <span class="plus">+300</span>
+      </a>
+      <a class="row" href="Visit-Rate.dc.html">
+        <span class="tick" aria-label="Не выполнено"></span>
+        <span class="row__body"><span class="row__t">Оценить визит</span><span class="row__s">Помогает клинике стать лучше</span></span>
+        <span class="plus">+100</span>
+      </a>
+      <div class="row">
+        <span class="tick on" aria-label="Выполнено"><x-import component-from-global-scope="EmirMed.Icon" name="check" size="{{ s18 }}"></x-import></span>
+        <span class="row__body"><span class="row__t">Добавить семью</span><span class="row__s">Арман, Айлин, мама</span></span>
+        <span class="plus">+100</span>
+      </div>
+    </div>
+
+    <div class="sec"><h2>Семейная цель</h2><span class="muted">Айлин</span></div>
+    <section class="em-card pad">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <img class="ico" src="img/pediatr.svg" alt="">
+        <span class="row__body"><span class="row__t">Прививки по календарю</span><span class="row__s">4 из 5 в этом году · следующая через 5 дней</span></span>
+      </div>
+      <div class="meter" role="img" aria-label="4 из 5"><i style="width: 80%;"></i></div>
+    </section>
+    <p class="dock-note" style="margin: 0;">Шаги берутся только из плана врача и календаря прививок. За покупки услуг очки не начисляем</p>
+  </div>
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ no }}">
+    <div class="toast" role="status"><x-import component-from-global-scope="EmirMed.Icon" name="gift" size="{{ s22 }}"></x-import><span>+150 бонусов · 7 дней подряд!</span></div>
+  </sc-if>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    const st = this.state || {};
+    const bp = !!st.bp;
+    const done = bp ? 3 : 2;
+    const days = bp ? 7 : 6;
+    return {
+      yes: true, no: false, s18: 18, s22: 22,
+      heroTitle: bp ? 'Ещё 2 шага до уровня 3' : 'Ещё 3 шага до уровня 3',
+      doneCount: done,
+      meterStyle: 'width: ' + (done * 20) + '%;',
+      meterLabel: done + ' из 5 шагов',
+      bpDone: bp, bpOpen: !bp,
+      bpTick: 'tick' + (bp ? ' on' : ''),
+      bpLabel: bp ? 'Выполнено' : 'Не выполнено',
+      bpNote: bp ? '7 из 7 · врач увидит дневник' : '6 из 7 · осталось сегодня',
+      streak: [0, 1, 2, 3, 4, 5, 6].map((i) => ({ cls: i < days ? 'on' : '' })),
+      toast: !!st.toast,
+      markToday: () => {
+        this.setState({ bp: true, toast: true });
+        clearTimeout(this._t);
+        this._t = setTimeout(() => this.setState({ toast: false }), 2400);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

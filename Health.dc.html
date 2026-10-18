@@ -35,6 +35,18 @@ a{color:#17644a}a:hover{color:#0e3b2d}
       <x-import component-from-global-scope="EmirMed.LabResult" status="progress" name="Витамин D (25-OH)" note="Будет готов завтра"></x-import>
       <a class="hit" href="Health-Lab.dc.html" aria-label="Открыть анализ крови"></a>
     </div>
+    <div class="list">
+      <a class="row" href="Health-Trend.dc.html">
+        <img class="ico" src="img/labs.svg" alt="">
+        <span class="row__body"><span class="row__t">Динамика анализов</span><span class="row__s">Ферритин, гемоглобин, витамин D</span></span>
+        <span class="row__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </a>
+      <a class="row" href="Health-Plan.dc.html">
+        <img class="ico" src="img/calendar.svg" alt="">
+        <span class="row__body"><span class="row__t">Что досдать и когда</span><span class="row__s">3 пункта от врача · 1 подсказка</span></span>
+        <span class="row__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </a>
+    </div>
     <div class="sec"><h2>Важно для врачей</h2></div>
     <div class="em-card em-list">
       <x-import component-from-global-scope="EmirMed.ListRow" icon="alert" title="Аллергия" value="Пенициллин"></x-import>
@@ -56,7 +68,7 @@ a{color:#17644a}a:hover{color:#0e3b2d}
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
 class Component extends DCLogic {
   renderVals() {
-    return { noop: () => {}, tabs: ['Анализы', 'Назначения', 'Документы'] };
+    return { s20: 20, noop: () => {}, tabs: ['Анализы', 'Назначения', 'Документы'] };
   }
 }
 </script>

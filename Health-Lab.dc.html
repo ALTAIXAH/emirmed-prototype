@@ -37,13 +37,20 @@ a{color:#17644a}a:hover{color:#0e3b2d}
       <x-import component-from-global-scope="EmirMed.LabValue" name="Гемоглобин" value="{{ hb }}" unit="г/л" min="{{ hbMin }}" max="{{ hbMax }}"></x-import>
       <x-import component-from-global-scope="EmirMed.LabValue" name="Лейкоциты" value="{{ wbc }}" unit="×10⁹/л" min="{{ wbcMin }}" max="{{ wbcMax }}"></x-import>
     </div>
+    <div class="list">
+      <a class="row" href="Health-Trend.dc.html">
+        <img class="ico" src="img/labs.svg" alt="">
+        <span class="row__body"><span class="row__t">Сравнить с прошлыми</span><span class="row__s">Ферритин: 18 → 9 за 7 месяцев</span></span>
+        <span class="row__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </a>
+    </div>
   </div>
 </div>
 </template>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
 class Component extends DCLogic {
   renderVals() {
-    return { fer: 9, ferMin: 13, ferMax: 150, hb: 128, hbMin: 120, hbMax: 160, wbc: 6.2, wbcMin: 4, wbcMax: 9 };
+    return { s20: 20, fer: 9, ferMin: 13, ferMax: 150, hb: 128, hbMin: 120, hbMax: 160, wbc: 6.2, wbcMin: 4, wbcMax: 9 };
   }
 }
 </script>

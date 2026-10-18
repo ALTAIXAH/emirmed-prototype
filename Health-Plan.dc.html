@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Что досдать и когда</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+.plan-item{display:grid;gap:10px;padding:14px}
+.plan-item + .plan-item{border-top:1px solid var(--line)}
+.plan-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.plan-main{display:flex;align-items:center;gap:12px}
+.plan-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.plan-actions--one{grid-template-columns:minmax(0,1fr)}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll scroll--end">
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.TopBar" variant="nav" title="Что досдать и когда"></x-import>
+      <a class="hit-left" href="Health.dc.html" aria-label="Назад"></a>
+    </div>
+    <section class="hero">
+      <div>
+        <div class="hero__eyebrow">До конца года · {{ left }}</div>
+        <h2 class="hero__t">Ваш план в одном месте</h2>
+        <p class="hero__s">Пункты — от врача или по календарю прививок. Цена видна заранее, отложить можно всегда</p>
+      </div>
+    </section>
+
+    <div class="list">
+      <sc-for list="{{ items }}" as="it" hint-placeholder-count="4">
+        <div class="plan-item">
+          <div class="plan-top"><span class="{{ it.tag }}">{{ it.who }}</span><span class="row__s">{{ it.when }}</span></div>
+          <div class="plan-main">
+            <img class="ico" src="{{ it.ico }}" alt="">
+            <span class="row__body"><span class="row__t">{{ it.title }}</span><span class="row__s">{{ it.why }}</span></span>
+            <span class="row__end">{{ it.price }}</span>
+          </div>
+          <sc-if value="{{ it.book }}" hint-placeholder-val="{{ yes }}">
+            <div class="plan-actions"><a class="{{ it.btn }}" href="Book-Slot.dc.html">{{ it.cta }}</a><button type="button" class="em-btn em-btn--quiet em-btn--md" onClick="{{ it.snooze }}">Позже</button></div>
+          </sc-if>
+          <sc-if value="{{ it.ask }}" hint-placeholder-val="{{ no }}">
+            <div class="plan-actions plan-actions--one"><a class="em-btn em-btn--secondary em-btn--md" href="AI-Chat.dc.html">Задать вопрос врачу</a></div>
+          </sc-if>
+          <sc-if value="{{ it.later }}" hint-placeholder-val="{{ no }}">
+            <div class="row__ok popin">Напомним через неделю</div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <div class="list">
+      <a class="row" href="Health-Path.dc.html">
+        <img class="ico" src="img/gift.svg" alt="">
+        <span class="row__body"><span class="row__t">+300 бонусов за каждый пункт</span><span class="row__s">Путь здоровья · уровень 2</span></span>
+        <span class="row__go"><x-import component-from-global-scope="EmirMed.Icon" name="chevron-right" size="{{ s20 }}"></x-import></span>
+      </a>
+    </div>
+    <p class="dock-note" style="margin: 0;">ИИ не назначает анализы. Он только подсказывает, что спросить у врача</p>
+  </div>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const later = (this.state && this.state.later) || {};
+    const base = [
+      { id: 'vac', who: 'Календарь прививок', tag: 'tag tag--clinic', when: 'через 5 дней', ico: 'img/calendar.svg',
+        title: 'Прививка Айлин', why: 'Плановая, по национальному календарю', price: '', cta: 'Записаться' },
+      { id: 'ped', who: 'Назначил врач', tag: 'tag tag--doc', when: 'до 21 октября', ico: 'img/pediatr.svg',
+        title: 'Повторный осмотр Айлин', why: 'Саяндинова Н. А. · контроль после ОРВИ', price: '7 000 ₸', cta: 'Выбрать время' },
+      { id: 'fer', who: 'Назначил врач', tag: 'tag tag--doc', when: 'до 10 декабря', ico: 'img/labs.svg',
+        title: 'Повторить ферритин', why: 'Маткасимов Р. Ж. · проверить курс железа', price: '2 400 ₸', cta: 'Записаться' },
+      { id: 'vd', who: 'Подсказка ИИ', tag: 'tag tag--ai', when: 'к приёму', ico: 'img/assistant.svg',
+        title: 'Витамин D уже в норме', why: 'Спросите, нужно ли менять дозировку', price: '', ai: true }
+    ];
+    const items = base.map((it, i) => Object.assign({}, it, {
+      btn: 'em-btn em-btn--md ' + (i === 0 ? 'em-btn--primary' : 'em-btn--secondary'),
+      later: !!later[it.id],
+      book: !it.ai && !later[it.id],
+      ask: !!it.ai,
+      snooze: () => this.setState({ later: Object.assign({}, later, { [it.id]: true }) })
+    }));
+    const n = items.filter((it) => !it.later).length;
+    return {
+      yes: true, no: false, s20: 20,
+      left: n + (n === 1 ? ' пункт' : n < 5 ? ' пункта' : ' пунктов'),
+      items: items
+    };
+  }
+}
+</script>
+</body>
+</html>

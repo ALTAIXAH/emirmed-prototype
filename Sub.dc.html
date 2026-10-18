@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Программы EMIRMED</title>
+<meta name="viewport" content="width=393, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#F5F6F3}body{display:flex;justify-content:center}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="ds/emirmed/tokens.css">
+<link rel="stylesheet" href="ds/emirmed/components/bundle.css">
+<link rel="stylesheet" href="app.css">
+<script src="ds/emirmed/components/bundle.js"></script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<template id="dc">
+<helmet>
+<style>
+body{margin:0}
+a{color:#17644a}a:hover{color:#0e3b2d}
+.prog-head{display:flex;align-items:center;gap:12px}
+</style>
+</helmet>
+<div class="app">
+  <div class="scroll scroll--dock">
+    <div class="rel">
+      <x-import component-from-global-scope="EmirMed.TopBar" variant="nav" title="Программы наблюдения"></x-import>
+      <a class="hit-left" href="Profile.dc.html" aria-label="Назад"></a>
+    </div>
+    <x-import component-from-global-scope="EmirMed.SegmentedControl" label="Для кого" options="{{ tabs }}" value="{{ k }}" on-change="{{ pick }}"></x-import>
+    <section class="prog-card">
+      <div class="prog-head">
+        <img class="ico" src="{{ p.ico }}" alt="">
+        <span class="row__body"><span class="card-title" style="display: block;">{{ p.title }}</span><span class="row__s">{{ p.fit }}</span></span>
+      </div>
+      <div class="price"><b>{{ p.price }}</b><span>в месяц</span></div>
+      <ul>
+        <sc-for list="{{ p.inc }}" as="x" hint-placeholder-count="4"><li>{{ x }}</li></sc-for>
+      </ul>
+    </section>
+    <div class="list">
+      <div class="row">
+        <img class="ico" src="img/sale.svg" alt="">
+        <span class="row__body"><span class="row__t">{{ p.math }}</span><span class="row__s">Бываете 1–2 раза в год — обычная запись выгоднее</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="em-screen__dock em-screen__dock--col">
+    <button type="button" class="em-btn em-btn--primary em-btn--block" onClick="{{ ask }}">Подключить {{ p.short }}</button>
+    <div class="dock-note">Отключить можно в приложении в любой момент</div>
+  </div>
+  <sc-if value="{{ sent }}" hint-placeholder-val="{{ no }}">
+    <div class="overlay">
+      <div class="sheet" role="status">
+        <div class="okmark" aria-hidden="true"><span class="okmark__ring"></span><span class="okmark__ring"></span><span class="okmark__disc"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M11 21l6 6 12-13" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+        <h2 class="sheet__t">Заявка принята</h2>
+        <p class="sheet__s">Администратор филиала на Нусупбекова позвонит сегодня до 18:00, ответит на вопросы и подключит программу. Пока ничего не списываем.</p>
+        <button type="button" class="em-btn em-btn--primary em-btn--block" onClick="{{ close }}">Хорошо</button>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":393,"height":852}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const P = {
+      kid: { title: 'Педиатр на год', short: 'для Айлин', fit: 'Детям до 6 лет, которые часто болеют', price: '7 900 ₸', ico: 'img/pediatr.svg',
+        inc: ['Приёмы педиатра — без ограничений', 'Чат с педиатром 8:00–22:00, ответ за 30 минут', 'Общие анализы по плану врача', 'Прививки по календарю: напомним и запишем'],
+        math: 'Выгодно, если ходите чаще раза в месяц' },
+      me: { title: 'Давление под контролем', short: 'для вас', fit: 'Если врач назначил наблюдение', price: '4 900 ₸', ico: 'img/heart.svg',
+        inc: ['Терапевт раз в квартал', 'Врач смотрит дневник давления каждую неделю', 'ЭКГ и липидный профиль раз в год', 'Чат с врачом по будням'],
+        math: 'Выгодно при наблюдении у терапевта' },
+      fam: { title: 'Семья+', short: 'семье', fit: 'До 4 человек на одной карте', price: '14 900 ₸', ico: 'img/family.svg',
+        inc: ['Чекап раз в год каждому', 'Чат с терапевтом и педиатром', 'Скидка 15% на все приёмы', 'Врач на дом без доплаты за выезд — 2 раза в год'],
+        math: 'Выгодно, если в семье есть дети' }
+    };
+    const st = this.state || {};
+    const k = st.k || 'kid';
+    return {
+      no: false,
+      k: k,
+      tabs: [{ value: 'kid', label: 'Айлин' }, { value: 'me', label: 'Вам' }, { value: 'fam', label: 'Семье' }],
+      pick: (v) => this.setState({ k: v }),
+      p: P[k],
+      sent: !!st.sent,
+      ask: () => this.setState({ sent: true }),
+      close: () => this.setState({ sent: false })
+    };
+  }
+}
+</script>
+</body>
+</html>
